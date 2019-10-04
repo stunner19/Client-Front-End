@@ -35,3 +35,25 @@ export const signOut = () => {
         payload : ''
     }
 };
+
+export const signInUser = (response) => ({
+    type : ActionTypes.AUTH_USER,
+    payload : response
+});
+
+export const signIn = (email,password,callback) => async dispatch => {
+    try{
+        const response = await axios.post('http://localhost:3000/users/login', {
+            email : email,
+            password : password
+        });
+        dispatch(signInUser(response.data.token));
+        // to persist the state.
+        localStorage.setItem('token',response.data.token);
+        callback();
+    }catch(e){
+        const response = 'Invalid Login Credentials.'
+        console.log("failure",e);
+        dispatch(signUpFailed(response));
+    }
+};
