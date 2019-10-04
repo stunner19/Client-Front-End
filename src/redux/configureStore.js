@@ -10,6 +10,7 @@ export const configureStore = () => {
             auth : Auth,
             form : formReducer
         }),
+        // on refreshing, the redux state becomes empty, but the localstorage dosen't;
         { 
             auth : { authenticated : localStorage.getItem('token') } 
         },

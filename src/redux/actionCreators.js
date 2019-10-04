@@ -27,3 +27,11 @@ export const signUp = (email,password,callback) => async dispatch => {
         dispatch(signUpFailed(response));
     }
 };
+
+export const signOut = () => { 
+    localStorage.removeItem('token');
+    return {
+        type : ActionTypes.AUTH_USER,
+        payload : ''
+    }
+};
